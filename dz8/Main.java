@@ -1,24 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
         Family tree = new Family();
-        Person pers1 = new Person("Федор", "Иванов", "03.03.1930", "03.03.2010");
-        Person pers2 = new Person("Мария", "Иванова", "02.02.1962");
-        Person pers3 = new Person("Иван", "Иванов", "01.01.1961");
 
-        pers1.showInfo();
-        pers2.showInfo();
-        pers3.showInfo();
+        // Значения можно собирать в массиве
+        List<Person> persons = new ArrayList<Person>();
+        persons.add(new Person("Федор", "Иванов", "03.03.1930", "03.03.2010"));
+        persons.add(new Person("Мария", "Иванова", "02.02.1962"));
+        persons.add(new Person("Иван", "Иванов", "01.01.1961"));
 
-        tree.treePerson.add(pers1);
-        tree.treePerson.add(pers2);
-        tree.treePerson.add(pers3);
+        // Перебирая массив работаем со значениями
+        for (Person person : persons) {
+            person.showInfo();
+            tree.treePerson.add(person);
+        }
 
-        pers1.addRelatives(pers2, 1, 2);
-        pers1.addRelatives(pers3, 1, 2);
+        // добавляем связи в цикле
+        for (int i =1; i <= 2; i++)
+        {
+            persons.get(0).addRelatives(persons.get(i), 1, 2);  
+        }
 
-        pers1.printRelatives(2);
+        persons.get(0).printRelatives(2);
 
-        tree.showTree(pers1, "");
+        tree.showTree(persons.get(0), "");
     }
 }
